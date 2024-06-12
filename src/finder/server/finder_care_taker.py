@@ -19,7 +19,7 @@ class FinderCareTaker:
         careTaker = FinderCareTaker()
         careTaker = json.loads(json_data)
 
-        print ('data received ====' , careTaker)
+      #  print ('data received ====' , str(careTaker))
 
         # convert received person to local person Object
         careTakerLocal = FinderCareTaker()

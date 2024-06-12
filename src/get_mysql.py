@@ -34,6 +34,8 @@ URLS = (
     '/finder/caretaker/update', 'FinderUpdateCareTakerByID',
     '/finder/kid/get', 'FinderGetCareTakerByEmail',
     '/finder/gospel/get', 'FinderGospel',
+    '/finder/caretaker/insertmsg', 'FinderInsertCareTakerMsg',
+    '/finder/caretaker/getmsgHistory', 'FinderGetCareTakerMsgHistory',
 
 )
 
@@ -178,7 +180,8 @@ class FinderUpdateCareTakerByID(object):
         
         json_data = web.data()
         finderCareTaker = FinderCareTaker.setCareTaker(json_data)
-        print('update finderCareTaker-->' , finderCareTaker )
+        print('update finderCareTaker json_data-->' , json_data )
+        FinderDB.insert_care_taker_msg(finderCareTaker);
         return FinderDB.update_caretaker_by_id(finderCareTaker);
 
 class FinderGetCareTakerByEmail(object):
@@ -197,25 +200,18 @@ class FinderGospel(object):
         web.header('Access-Control-Allow-Credentials', 'true')
         web.header('strict-origin-when-cross-origin', 'true')
         return FinderDB.get_gospel()
-    
-class JsonGet(object):
 
-    def POST(self):
-        web.header('Access-Control-Allow-Origin',      '*')
-        web.header('Access-Control-Allow-Credentials', 'true')
-        web.header('strict-origin-when-cross-origin', 'true')
-        user_input = web.input()
-        return AgentDB.get_agent_db(user_input.id)
-    
-class JsonGetUser(object):
+class FinderGetCareTakerMsgHistory(object):
 
     def GET(self):
         web.header('Access-Control-Allow-Origin',      '*')
         web.header('Access-Control-Allow-Credentials', 'true')
         web.header('strict-origin-when-cross-origin', 'true')
+        
         user_input = web.input()
-        return AgentDB.get_user_db(user_input.id)
-    
+        print('user_input id-->' , user_input.id )
+        return FinderDB.get_care_taker_msg_history(user_input.id);
+
 def get_agent():
         agent = Agent()
         agent.fullName = "Testing"
