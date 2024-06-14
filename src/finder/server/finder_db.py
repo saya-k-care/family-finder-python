@@ -38,7 +38,8 @@ class FinderDB:
     def get_caretaker_by_id(id):
         conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
-        sql = "SELECT * from care_taker where care_taker_id = " + str(id);
+        
+        sql = "SELECT c.care_taker_id, m.care_taker_msg, m.datetime from care_taker AS c " + " LEFT JOIN care_taker_msg AS m ON c.care_taker_id = m.care_taker_id "  + " WHERE c.care_taker_id ='" +  str(id)  + "' ORDER BY m.DATETIME DESC LIMIT 1 "
         print ('sql->', sql)
         cursor.execute(sql)
         row_headers=[x[0] for x in cursor.description] #this will extract row headers
