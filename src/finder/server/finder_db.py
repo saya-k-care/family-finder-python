@@ -39,7 +39,7 @@ class FinderDB:
         conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         
-        sql = "SELECT c.care_taker_id, m.care_taker_msg, m.datetime from care_taker AS c " + " LEFT JOIN care_taker_msg AS m ON c.care_taker_id = m.care_taker_id "  + " WHERE c.care_taker_id ='" +  str(id)  + "' ORDER BY m.DATETIME DESC LIMIT 1 "
+        sql = "SELECT c.care_taker_id, m.care_taker_msg, c.care_taker_email, m.datetime from care_taker AS c " + " LEFT JOIN care_taker_msg AS m ON c.care_taker_id = m.care_taker_id "  + " WHERE c.care_taker_id ='" +  str(id)  + "' ORDER BY m.DATETIME DESC LIMIT 1 "
         print ('sql->', sql)
         cursor.execute(sql)
         row_headers=[x[0] for x in cursor.description] #this will extract row headers
@@ -103,7 +103,7 @@ class FinderDB:
     def get_location(id):
         conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
-        sql = "SELECT distinct(kid_name), kid_datetime, care_taker_id,  kid_location, kid_response from kid where care_taker_id = " + str(id) + " group by kid_name  ORDER BY kid_datetime DESC"  ;
+        sql = "SELECT kid_name,  max(kid_datetime) AS kid_datetime, care_taker_id,  kid_location, kid_response FROM kid  where care_taker_id =" + str(id) + "  group by kid_name ORDER BY kid_name"  ;
         print ('sql->', sql)
         cursor.execute(sql)
         row_headers=[x[0] for x in cursor.description] #this will extract row headers
