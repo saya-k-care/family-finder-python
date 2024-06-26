@@ -8,14 +8,10 @@ from agent.server.address import Address
 from agent.server.agent import Agent
 from agent.server.agent_db import AgentDB
 from agent.server.donate import Donate
-from agent.server.email_client import AgentEmail
-from agent.server.family_finder_rest import FamilyFinderRest
 from agent.server.user import User
 from finder.server.finder_care_taker import FinderCareTaker
 from finder.server.finder_db import FinderDB
 from finder.server.finder_kid import FinderKid
-import pymysql as MySQLdb
-
 
 sys.path.append('../')
 sys.path.append('../../')
@@ -36,6 +32,7 @@ URLS = (
     '/finder/gospel/get', 'FinderGospel',
     '/finder/caretaker/insertmsg', 'FinderInsertCareTakerMsg',
     '/finder/caretaker/getmsgHistory', 'FinderGetCareTakerMsgHistory',
+     '/finder/caretaker/delAllWorries', 'FinderDelAllWorries',
 
 )
 
@@ -210,8 +207,20 @@ class FinderGetCareTakerMsgHistory(object):
         
         user_input = web.input()
         print('user_input id-->' , user_input.id )
-        return FinderDB.get_care_taker_msg_history(user_input.id);
+        print('user_input limit-->' , user_input.limit )
+        return FinderDB.get_care_taker_msg_history(user_input.id, user_input.limit);
 
+class FinderDelAllWorries(object):
+
+    def GET(self):
+        web.header('Access-Control-Allow-Origin',      '*')
+        web.header('Access-Control-Allow-Credentials', 'true')
+        web.header('strict-origin-when-cross-origin', 'true')
+        
+        user_input = web.input()
+        print('user_input id-->' , user_input.id )
+        return FinderDB.del_all_worries(user_input.id);
+    
 def get_agent():
         agent = Agent()
         agent.fullName = "Testing"

@@ -250,10 +250,22 @@ class FinderDB:
                 print("MySQL connection is closed")
 
     @staticmethod
-    def get_care_taker_msg_history(id):
+    def del_all_worries(id):
         conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
-        sql = "SELECT * FROM  care_taker_msg WHERE care_taker_id = '" + id + "' ORDER BY DATETIME DESC LIMIT 10";
+        sql = "delete FROM care_taker_msg AS c WHERE c.care_taker_msg = 'No Worries.' and c.care_taker_id='" + id + "'";
+        print ('sql->', sql)
+        cursor.execute(sql)
+        deleted_row_count = cursor.rowcount
+        conn.commit()
+
+        return deleted_row_count
+    
+    @staticmethod
+    def get_care_taker_msg_history(id, limit):
+        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        cursor = conn.cursor()
+        sql = "SELECT * FROM  care_taker_msg WHERE care_taker_id = '" + id + "' ORDER BY DATETIME DESC limit " + limit +"";
         print ('sql->', sql)
         cursor.execute(sql)
         row_headers=[x[0] for x in cursor.description] #this will extract row headers
