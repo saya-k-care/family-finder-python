@@ -59,7 +59,7 @@ class FinderDB:
     def get_gospel():
         conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
-        sql = "SELECT * FROM gospel WHERE order_ads = ROUND( RAND() * 3)  LIMIT 1";
+        sql = "SELECT * FROM gospel WHERE order_ads = ROUND( RAND() * 19)  LIMIT 1";
         print ('sql->', sql)
         cursor.execute(sql)
         row_headers=[x[0] for x in cursor.description] #this will extract row headers
