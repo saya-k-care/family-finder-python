@@ -5,11 +5,11 @@ import jsonpickle
 import redis
 import requests
 
-from news.gpt import GPT
 import string
 import traceback
 import os
 from finder.news.news_redis import News
+from finder.news.gpt import GPT
 
 def is_yes(text):
     if "Yes," in text:
