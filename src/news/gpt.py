@@ -1,5 +1,8 @@
 import openai
-openai.api_key = 'sk-None-ja7roqsWq1DCjWErYVqJT3BlbkFJqZ6eNRY9Nzslev5hPwov'
+import os
+
+ai_key = os.environ.get('AI_KEY')
+openai.api_key = ai_key
 
 class GPT:
     @staticmethod
