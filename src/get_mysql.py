@@ -12,6 +12,7 @@ from agent.server.user import User
 from finder.server.finder_care_taker import FinderCareTaker
 from finder.server.finder_db import FinderDB
 from finder.server.finder_kid import FinderKid
+from news.get_news import GetNews
 
 sys.path.append('../')
 sys.path.append('../../')
@@ -32,7 +33,8 @@ URLS = (
     '/finder/gospel/get', 'FinderGospel',
     '/finder/caretaker/insertmsg', 'FinderInsertCareTakerMsg',
     '/finder/caretaker/getmsgHistory', 'FinderGetCareTakerMsgHistory',
-     '/finder/caretaker/delAllWorries', 'FinderDelAllWorries',
+    '/finder/caretaker/delAllWorries', 'FinderDelAllWorries',
+    '/finder/new/get', 'HTTPGetNews',
 
 )
 
@@ -190,6 +192,15 @@ class FinderGetCareTakerByEmail(object):
         user_input = web.input()
         return FinderDB.get_caretaker_by_email(user_input.email)
 
+class HTTPGetNews(object):
+
+    def GET(self):
+        web.header('Access-Control-Allow-Origin',      '*')
+        web.header('Access-Control-Allow-Credentials', 'true')
+        web.header('strict-origin-when-cross-origin', 'true')
+        user_input = web.input()
+        return GetNews.getNews(user_input.date, json.loads(user_input.is_positive.lower()))
+    
 class FinderGospel(object):
 
     def GET(self):

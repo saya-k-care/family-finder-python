@@ -8,6 +8,8 @@ class News:
     pubDate = None
     isPositive = None
     news_ai = None
+    well_being_ai = None
+    bible_ai = None
     
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 

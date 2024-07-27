@@ -16,7 +16,7 @@ import pymysql as MySQLdb
 class FinderDB:
     @staticmethod
     def login(id, password):
-        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         sql = "select * from care_taker where care_taker_email = '" + str(id) + "' and care_taker_password = '" + str(password) + "'";
         print ('sql->', sql)
@@ -36,7 +36,7 @@ class FinderDB:
 
     @staticmethod
     def get_caretaker_by_id(id):
-        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         
         sql = "SELECT c.care_taker_id, m.care_taker_msg, c.care_taker_email, m.datetime from care_taker AS c " + " LEFT JOIN care_taker_msg AS m ON c.care_taker_id = m.care_taker_id "  + " WHERE c.care_taker_id ='" +  str(id)  + "' ORDER BY m.DATETIME DESC LIMIT 1 "
@@ -57,7 +57,7 @@ class FinderDB:
 
     @staticmethod
     def get_gospel():
-        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         import random
         randomNum = random.uniform(0, 17)
@@ -80,7 +80,7 @@ class FinderDB:
         
     @staticmethod
     def get_caretaker_by_email(email):
-        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         sql = "SELECT * from care_taker where care_taker_email = '" + str(email) + "'";
         print ('sql->', sql)
@@ -104,7 +104,7 @@ class FinderDB:
         
     @staticmethod
     def get_location(id):
-        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         sql = "SELECT kid_name,  max(kid_datetime) AS kid_datetime, care_taker_id,  kid_location, kid_response FROM kid  where care_taker_id =" + str(id) + "  group by kid_name ORDER BY kid_name"  ;
         print ('sql->', sql)
@@ -131,7 +131,7 @@ class FinderDB:
     @staticmethod
     def update_caretaker_by_id(finderCareTaker: FinderCareTaker):
         try:
-                conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+                conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
                 cursor = conn.cursor()
                 print ('finderCareTaker.email---->' + finderCareTaker.care_taker_email)
                 print ('finderCareTaker.email str---->' + str(finderCareTaker.care_taker_email))
@@ -160,7 +160,7 @@ class FinderDB:
     @staticmethod
     def register(finderCareTaker: FinderCareTaker):
         try:
-                conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+                conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
                 cursor = conn.cursor()
                 print ('finderCareTaker.email---->' + finderCareTaker.care_taker_email)
                 print ('finderCareTaker.email str---->' + str(finderCareTaker.care_taker_email))
@@ -190,7 +190,7 @@ class FinderDB:
     @staticmethod
     def update(kid: FinderKid):
         try:
-                conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+                conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
                 cursor = conn.cursor()
                 print ('kid.care_taker_id---->' + str(kid.care_taker_id))
                 print ('kid.care_taker_id str---->' + str(kid.care_taker_id))
@@ -225,7 +225,7 @@ class FinderDB:
     @staticmethod
     def insert_care_taker_msg(finderCareTaker: FinderCareTaker):
         try:
-                conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+                conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
                 cursor = conn.cursor()
                 print ('finderCareTaker.id str---->' + str(finderCareTaker.care_taker_id))
                 mySql_insert_query = """INSERT INTO care_taker_msg (`care_taker_id`, `care_taker_msg`) 
@@ -254,7 +254,7 @@ class FinderDB:
 
     @staticmethod
     def del_all_worries(id):
-        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         sql = "delete FROM care_taker_msg AS c WHERE c.care_taker_msg = 'No Worries.' and c.care_taker_id='" + id + "'";
         print ('sql->', sql)
@@ -266,7 +266,7 @@ class FinderDB:
     
     @staticmethod
     def get_care_taker_msg_history(id, limit):
-        conn=MySQLdb.connect(host="bayi",user="admin",passwd="password", db="eyebot_agent")
+        conn=MySQLdb.connect(host="219.93.129.18",user="admin",passwd="password", db="eyebot_agent")
         cursor = conn.cursor()
         sql = "SELECT * FROM  care_taker_msg WHERE care_taker_id = '" + id + "' ORDER BY DATETIME DESC limit " + limit +"";
         print ('sql->', sql)
