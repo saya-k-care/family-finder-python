@@ -52,7 +52,7 @@ def process_bible_news(news_redis_obj):
             print(traceback.format_exc())
     return news_redis_obj
 
-r = requests.get("https://newsdata.io/api/1/news?apikey=pub_49037ebd46b4a3fd58ca99decfb2cd2e52794&q=malaysia&country=my")
+r = requests.get("https://newsdata.io/api/1/latest?apikey=pub_49037ebd46b4a3fd58ca99decfb2cd2e52794&q=malaysia&country=my")
 #r = requests.get("http://localhost:8080/examples/news.txt")
 
 new_str = str(r.text)
@@ -65,7 +65,7 @@ results = jsonObject["results"]
 news_src_list=[]
 for object in results:
     try:
-        # print ("pubDate-->", object['pubDate'] )  
+        print ("pubDate-->", object['pubDate'] )  
         # print ("title-->", object['title'])
         # print ("link-->", object['link'])
         # print ("image_url-->", object['image_url'])   

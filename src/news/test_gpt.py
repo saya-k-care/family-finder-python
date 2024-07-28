@@ -7,7 +7,8 @@ def str_to_class(classname):
 
 str1 = "ChatCompletion(id='chatcmpl-9on2sEj4BoQScVmTFBqfYSueV9hKo', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='No.', role='assistant', function_call=None, tool_calls=None))], created=1721891958, model='gpt-4o-mini-2024-07-18', object='chat.completion', service_tier=None, system_fingerprint='fp_661538dc1f', usage=CompletionUsage(completion_tokens=2, prompt_tokens=32, total_tokens=34))"
 
+from pygooglenews import GoogleNews
 
-#ChatCompletion obj = eval(str1)
-
-#print (obj)
+gn = GoogleNews(lang = 'en', country = 'MY')
+top = gn.top_news()
+print(top.encode("utf-8"))

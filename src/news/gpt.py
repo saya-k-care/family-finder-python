@@ -1,7 +1,7 @@
 import openai
 import os
 
-ai_key = os.environ.get('AI_KEY')
+ai_key = os.environ.get('OPENAI_API_KEY')
 openai.api_key = ai_key
 
 class GPT:
