@@ -19,4 +19,4 @@ class GetNews:
         json_news = jsonpickle.encode(news_redis_obj)
         return json_news
 
-print (GetNews.getNews("2024-07-26", True))
+# print (GetNews.getNews("2024-07-26", True))
