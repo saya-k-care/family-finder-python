@@ -775,3 +775,39 @@
 15:12:11,525 root INFO Starting scheduler
 15:12:11,525 tzlocal DEBUG Looking up time zone info from registry
 15:12:11,530 root INFO executing test
+15:12:30,944 apscheduler.scheduler DEBUG Looking for jobs to run
+15:12:30,945 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:13:30.929207+08:00 (in 59.984088 seconds)
+15:12:30,945 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:13:30 CST)" (scheduled at 2024-07-29 15:12:30.929207+08:00)
+15:12:30,945 root INFO Running Urban Planning
+15:12:30,945 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:13:30 CST)" executed successfully
+15:13:30,744 root INFO Starting scheduler
+15:13:30,744 tzlocal DEBUG Looking up time zone info from registry
+15:13:30,750 apscheduler.scheduler INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+15:13:30,751 apscheduler.scheduler INFO Added job "your_job2" to job store "default"
+15:13:30,751 apscheduler.scheduler INFO Scheduler started
+15:13:30,751 apscheduler.scheduler DEBUG Looking for jobs to run
+15:13:30,752 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:14:30.749710+08:00 (in 59.996982 seconds)
+15:13:30,941 apscheduler.scheduler DEBUG Looking for jobs to run
+15:13:30,941 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:14:30.929207+08:00 (in 59.988003 seconds)
+15:13:30,941 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:14:30 CST)" (scheduled at 2024-07-29 15:13:30.929207+08:00)
+15:13:30,942 root INFO Running Urban Planning
+15:13:30,942 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:14:30 CST)" executed successfully
+15:13:59,402 root INFO Starting scheduler
+15:13:59,402 tzlocal DEBUG Looking up time zone info from registry
+15:13:59,409 apscheduler.scheduler INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+15:13:59,410 apscheduler.scheduler INFO Added job "your_job2" to job store "default"
+15:13:59,410 apscheduler.scheduler INFO Scheduler started
+15:13:59,410 apscheduler.scheduler DEBUG Looking for jobs to run
+15:13:59,410 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:14:59.408269+08:00 (in 59.997999 seconds)
+15:14:11,882 root INFO Starting scheduler
+15:14:11,883 tzlocal DEBUG Looking up time zone info from registry
+15:14:11,888 apscheduler.scheduler INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+15:14:11,889 apscheduler.scheduler INFO Added job "your_job2" to job store "default"
+15:14:11,889 apscheduler.scheduler INFO Scheduler started
+15:14:11,890 apscheduler.scheduler DEBUG Looking for jobs to run
+15:14:11,890 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:15:11.888259+08:00 (in 59.997997 seconds)
+15:14:30,945 apscheduler.scheduler DEBUG Looking for jobs to run
+15:14:30,945 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:15:30.929207+08:00 (in 59.983970 seconds)
+15:14:30,945 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:15:30 CST)" (scheduled at 2024-07-29 15:14:30.929207+08:00)
+15:14:30,945 root INFO Running Urban Planning
+15:14:30,945 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:15:30 CST)" executed successfully

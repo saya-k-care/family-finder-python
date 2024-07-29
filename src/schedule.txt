@@ -1,0 +1,7 @@
+15:14:35,579 root INFO Starting scheduler
+15:14:35,580 tzlocal DEBUG Looking up time zone info from registry
+15:14:35,586 apscheduler.scheduler INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+15:14:35,587 apscheduler.scheduler INFO Added job "your_job2" to job store "default"
+15:14:35,588 apscheduler.scheduler INFO Scheduler started
+15:14:35,588 apscheduler.scheduler DEBUG Looking for jobs to run
+15:14:35,588 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:15:35.586597+08:00 (in 59.998039 seconds)
