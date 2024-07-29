@@ -10,7 +10,7 @@ import traceback
 import os
 from news.gpt import GPT
 from news.news_redis import News
-from news.rss_google import RSSGoogle
+from rss_google import RSSGoogle
 
 def is_yes(text):
     if "Yes," in text:
