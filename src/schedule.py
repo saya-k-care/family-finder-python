@@ -7,8 +7,8 @@ import sys
 path = None
 
 def your_job(path):
-        logging.info("executing " , str('python ' + path))
-        subprocess.call(['sh', str('python ' + path)])
+        logging.info("executing " , str('python3 ' + path))
+        subprocess.call(['sh', str('python3 ' + path)])
 
 if __name__ == '__main__':
     n = len(sys.argv)
