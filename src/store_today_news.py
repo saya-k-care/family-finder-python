@@ -10,6 +10,7 @@ import traceback
 import os
 from news.gpt import GPT
 from news.news_redis import News
+from news.rss_google import RSSGoogle
 
 def is_yes(text):
     if "Yes," in text:
@@ -52,31 +53,36 @@ def process_bible_news(news_redis_obj):
             print(traceback.format_exc())
     return news_redis_obj
 
-r = requests.get("https://newsdata.io/api/1/latest?apikey=pub_49037ebd46b4a3fd58ca99decfb2cd2e52794&q=malaysia&country=my")
+def newsdata(news_src_list):
+    r = requests.get("https://newsdata.io/api/1/latest?apikey=pub_49037ebd46b4a3fd58ca99decfb2cd2e52794&q=malaysia&country=my")
 #r = requests.get("http://localhost:8080/examples/news.txt")
 
-new_str = str(r.text)
-new_str = new_str.replace("b'", "")
-new_str = new_str.replace("\r\n", "")
+    new_str = str(r.text)
+    new_str = new_str.replace("b'", "")
+    new_str = new_str.replace("\r\n", "")
 
-jsonObject = json.loads(new_str)
+    jsonObject = json.loads(new_str)
 
-results = jsonObject["results"]
-news_src_list=[]
-for object in results:
-    try:
-        print ("pubDate-->", object['pubDate'] )  
+    results = jsonObject["results"]
+
+    for object in results:
+        try:
+            print ("pubDate-->", object['pubDate'] )  
         # print ("title-->", object['title'])
         # print ("link-->", object['link'])
         # print ("image_url-->", object['image_url'])   
-        newsObject = News()
-        newsObject.pubDate = object['pubDate'];
-        newsObject.title = object['title'];
-        newsObject.link = object['link'];
-        newsObject.image_url = object['image_url'];
-        news_src_list.append(newsObject)
-    except Exception as error:
-        print("An exception occurred," , error)
+            newsObject = News()
+            newsObject.pubDate = object['pubDate'];
+            newsObject.title = object['title'];
+            newsObject.link = object['link'];
+            newsObject.image_url = object['image_url'];
+            news_src_list.append(newsObject)
+        except Exception as error:
+                print("An exception occurred," , error)
+        return news_src_list
+
+news_src_list=[]
+news_src_list = RSSGoogle.processGoogleNews(news_src_list)
 
 print ('Total Length->', len(news_src_list), ' json_data raw -->' , news_src_list)
 

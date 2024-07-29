@@ -9,6 +9,7 @@ class News:
     isPositive = None
     news_ai = None
     well_being_ai = None
+    description = None
     bible_ai = None
     
     def toJSON(self):
