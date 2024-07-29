@@ -11,6 +11,7 @@ import os
 from news.gpt import GPT
 from news.news_redis import News
 from rss_google import RSSGoogle
+import logging
 
 def is_yes(text):
     if "Yes," in text:
@@ -82,6 +83,16 @@ def newsdata(news_src_list):
                 print("An exception occurred," , error)
         return news_src_list
 
+logging.basicConfig(filename='storenews.txt',
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.DEBUG)
+
+logger = logging.getLogger('urbanGUI')
+
+logging.info("Starting process news")
+    
 news_src_list=[]
 news_src_list = RSSGoogle.processGoogleNews(news_src_list)
 
@@ -93,11 +104,11 @@ news_src_json = jsonpickle.encode(news_src_list)
 news_dir = os.environ.get('NEWS_DIR')
 file_name = str(news_dir) + str(date.today()) + "_redis_news.txt"
 
-redis_file = open(file_name, "w")
+redis_file = open(file_name + "_temp", "w")
 redis_file.write(news_src_json)
 redis_file.close()
 
-redis_file = open(file_name, "r+")
+redis_file = open(file_name + "_temp", "r+")
 news_redis_json = redis_file.read()
 redis_file.close()
 # r.set(today_date, news_src_json)
@@ -108,6 +119,7 @@ print ('file news -->' + news_redis_json)
 news_redis_obj = jsonpickle.decode(news_redis_json)
 print ('length news_redis_obj after save -->' , len(news_redis_obj))
 
+logging.info('length news_redis_obj after save -->')
 for value in news_redis_obj:
     try:
         # print(value.title)
@@ -119,17 +131,21 @@ for value in news_redis_obj:
         value.isPositive = yes_or_no
         value.news_ai = answer
         print ("processed answer-->" , yes_or_no , "." + answer)
-        
+        logging.info("processed answer-->" , yes_or_no , "." + answer)
     except Exception as error:
         print("An exception occurred," , error)
         print(traceback.format_exc())
 
+logging.info("processed negative news")
 news_redis_obj = process_negative_news(news_redis_obj)
+logging.info("processed bible news")
 news_redis_obj = process_bible_news(news_redis_obj)
 news_dir = os.environ.get('NEWS_DIR') 
 redis_file = open(file_name, "w")
         
 news_src_json = jsonpickle.encode(news_redis_obj)
+news_redis_obj = list(dict.fromkeys(news_redis_obj))
 redis_file.write(news_src_json)
 redis_file.close()
+logging.info("processing done")
 #return "Yes, it highlights the need for attitudes to evolve with new policies for effective implementation."
