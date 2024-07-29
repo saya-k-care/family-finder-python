@@ -6,9 +6,9 @@ import sys
 
 path = None
 
-def your_job(path):
-        logging.info("executing " , str('python3 ' + path))
-        subprocess.call(['sh', str('python3 ' + path)])
+def your_job(filetorun):
+        logging.info("executing " + "test")
+        subprocess.Popen('python3 ' + filetorun, shell=True)
 
 if __name__ == '__main__':
     n = len(sys.argv)
@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     # Arguments passed
     print("\nFile to execute:", sys.argv[1])
-    path = sys.argv[1]
+    filetorun = sys.argv[1]
     print("\nMinutes:", sys.argv[2])
     minute = int(sys.argv[2])
     logging.basicConfig(filename='schedule',
@@ -29,6 +29,6 @@ if __name__ == '__main__':
 
     logging.info("Starting scheduler")
     scheduler = BlockingScheduler()
-    scheduler.add_job(your_job(path), 'interval', minutes=minute)
+    scheduler.add_job(your_job(filetorun), 'interval', minutes=minute)
     scheduler.start()
 
