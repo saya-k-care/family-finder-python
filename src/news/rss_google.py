@@ -1,4 +1,3 @@
-
 import feedparser
 from news.news_redis import News
 from news.gpt import GPT
