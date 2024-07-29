@@ -46,6 +46,7 @@ def process_bible_news(news_redis_obj):
         # print(value.title)
         #answer = GPT.askGPTDummyYes('Important?' + value.title)
             answer = GPT.askGPT_bible(value.title)
+            value.bible_life = GPT.askGPT_bible_life(answer)
             value.bible_ai = answer
         
         except Exception as error:

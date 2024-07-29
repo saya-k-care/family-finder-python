@@ -42,6 +42,18 @@ class GPT:
         return completion.choices[0].message.content
 
     @staticmethod
+    def askGPT_bible_life(str):
+        ques = str + " . Give a Bible life example in less than 50 words";
+        completion = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "user", "content": ques}
+                ],)
+    
+        print(completion.choices[0].message.content)
+        return completion.choices[0].message.content
+
+    @staticmethod
     def askGPT_description(str):
         ques = str + " . Summarize this in less than 50 words";
         completion = openai.chat.completions.create(

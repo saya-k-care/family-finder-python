@@ -50,3 +50,58 @@
 15:23:35,593 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:24:35 CST)" (scheduled at 2024-07-29 15:23:35.586597+08:00)
 15:23:35,594 root INFO executing test--version
 15:23:35,595 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:24:35 CST)" executed successfully
+15:24:35,599 apscheduler.scheduler DEBUG Looking for jobs to run
+15:24:35,599 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:25:35.586597+08:00 (in 59.987189 seconds)
+15:24:35,599 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:25:35 CST)" (scheduled at 2024-07-29 15:24:35.586597+08:00)
+15:24:35,599 root INFO executing test--version
+15:24:35,601 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:25:35 CST)" executed successfully
+15:25:35,587 apscheduler.scheduler DEBUG Looking for jobs to run
+15:25:35,587 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:26:35.586597+08:00 (in 59.998615 seconds)
+15:25:35,588 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:26:35 CST)" (scheduled at 2024-07-29 15:25:35.586597+08:00)
+15:25:35,588 root INFO executing test--version
+15:25:35,589 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:26:35 CST)" executed successfully
+15:26:35,602 apscheduler.scheduler DEBUG Looking for jobs to run
+15:26:35,602 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:27:35.586597+08:00 (in 59.984574 seconds)
+15:26:35,602 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:27:35 CST)" (scheduled at 2024-07-29 15:26:35.586597+08:00)
+15:26:35,602 root INFO executing test--version
+15:26:35,603 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:27:35 CST)" executed successfully
+15:27:35,590 apscheduler.scheduler DEBUG Looking for jobs to run
+15:27:35,591 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:28:35.586597+08:00 (in 59.995527 seconds)
+15:27:35,591 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:28:35 CST)" (scheduled at 2024-07-29 15:27:35.586597+08:00)
+15:27:35,591 root INFO executing test--version
+15:27:35,592 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:28:35 CST)" executed successfully
+15:28:35,591 apscheduler.scheduler DEBUG Looking for jobs to run
+15:28:35,591 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:29:35.586597+08:00 (in 59.994797 seconds)
+15:28:35,591 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:29:35 CST)" (scheduled at 2024-07-29 15:28:35.586597+08:00)
+15:28:35,591 root INFO executing test--version
+15:28:35,593 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:29:35 CST)" executed successfully
+15:29:35,596 apscheduler.scheduler DEBUG Looking for jobs to run
+15:29:35,597 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:30:35.586597+08:00 (in 59.989028 seconds)
+15:29:35,597 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:30:35 CST)" (scheduled at 2024-07-29 15:29:35.586597+08:00)
+15:29:35,597 root INFO executing test--version
+15:29:35,598 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:30:35 CST)" executed successfully
+15:30:35,599 apscheduler.scheduler DEBUG Looking for jobs to run
+15:30:35,599 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:31:35.586597+08:00 (in 59.986831 seconds)
+15:30:35,599 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:31:35 CST)" (scheduled at 2024-07-29 15:30:35.586597+08:00)
+15:30:35,599 root INFO executing test--version
+15:30:35,601 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:31:35 CST)" executed successfully
+15:31:35,596 apscheduler.scheduler DEBUG Looking for jobs to run
+15:31:35,597 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:32:35.586597+08:00 (in 59.989311 seconds)
+15:31:35,597 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:32:35 CST)" (scheduled at 2024-07-29 15:31:35.586597+08:00)
+15:31:35,597 root INFO executing test--version
+15:31:35,599 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:32:35 CST)" executed successfully
+15:32:35,597 apscheduler.scheduler DEBUG Looking for jobs to run
+15:32:35,597 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:33:35.586597+08:00 (in 59.989474 seconds)
+15:32:35,597 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:33:35 CST)" (scheduled at 2024-07-29 15:32:35.586597+08:00)
+15:32:35,597 root INFO executing test--version
+15:32:35,599 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:33:35 CST)" executed successfully
+15:33:35,601 apscheduler.scheduler DEBUG Looking for jobs to run
+15:33:35,601 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:34:35.586597+08:00 (in 59.984745 seconds)
+15:33:35,601 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:34:35 CST)" (scheduled at 2024-07-29 15:33:35.586597+08:00)
+15:33:35,602 root INFO executing test--version
+15:33:35,603 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:34:35 CST)" executed successfully
+15:34:35,599 apscheduler.scheduler DEBUG Looking for jobs to run
+15:34:35,599 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:35:35.586597+08:00 (in 59.986617 seconds)
+15:34:35,600 apscheduler.executors.default INFO Running job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:35:35 CST)" (scheduled at 2024-07-29 15:34:35.586597+08:00)
+15:34:35,600 root INFO executing test--version
+15:34:35,601 apscheduler.executors.default INFO Job "your_job2 (trigger: interval[0:01:00], next run at: 2024-07-29 15:35:35 CST)" executed successfully

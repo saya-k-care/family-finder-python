@@ -11,6 +11,7 @@ class News:
     well_being_ai = None
     description = None
     bible_ai = None
+    bible_life = None
     
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
