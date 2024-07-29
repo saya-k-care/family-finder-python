@@ -811,3 +811,38 @@
 15:14:30,945 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:15:30 CST)" (scheduled at 2024-07-29 15:14:30.929207+08:00)
 15:14:30,945 root INFO Running Urban Planning
 15:14:30,945 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:15:30 CST)" executed successfully
+15:15:30,937 apscheduler.scheduler DEBUG Looking for jobs to run
+15:15:30,937 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:16:30.929207+08:00 (in 59.991826 seconds)
+15:15:30,937 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:16:30 CST)" (scheduled at 2024-07-29 15:15:30.929207+08:00)
+15:15:30,937 root INFO Running Urban Planning
+15:15:30,937 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:16:30 CST)" executed successfully
+15:16:30,932 apscheduler.scheduler DEBUG Looking for jobs to run
+15:16:30,933 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:17:30.929207+08:00 (in 59.996169 seconds)
+15:16:30,933 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:17:30 CST)" (scheduled at 2024-07-29 15:16:30.929207+08:00)
+15:16:30,933 root INFO Running Urban Planning
+15:16:30,934 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:17:30 CST)" executed successfully
+15:17:30,939 apscheduler.scheduler DEBUG Looking for jobs to run
+15:17:30,939 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:18:30.929207+08:00 (in 59.989416 seconds)
+15:17:30,939 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:18:30 CST)" (scheduled at 2024-07-29 15:17:30.929207+08:00)
+15:17:30,939 root INFO Running Urban Planning
+15:17:30,939 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:18:30 CST)" executed successfully
+15:18:30,944 apscheduler.scheduler DEBUG Looking for jobs to run
+15:18:30,944 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:19:30.929207+08:00 (in 59.984223 seconds)
+15:18:30,944 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:19:30 CST)" (scheduled at 2024-07-29 15:18:30.929207+08:00)
+15:18:30,944 root INFO Running Urban Planning
+15:18:30,944 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:19:30 CST)" executed successfully
+15:19:30,944 apscheduler.scheduler DEBUG Looking for jobs to run
+15:19:30,944 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:20:30.929207+08:00 (in 59.984931 seconds)
+15:19:30,944 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:20:30 CST)" (scheduled at 2024-07-29 15:19:30.929207+08:00)
+15:19:30,944 root INFO Running Urban Planning
+15:19:30,944 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:20:30 CST)" executed successfully
+15:20:30,933 apscheduler.scheduler DEBUG Looking for jobs to run
+15:20:30,934 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:21:30.929207+08:00 (in 59.995144 seconds)
+15:20:30,934 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:21:30 CST)" (scheduled at 2024-07-29 15:20:30.929207+08:00)
+15:20:30,934 root INFO Running Urban Planning
+15:20:30,935 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:21:30 CST)" executed successfully
+15:21:30,935 apscheduler.scheduler DEBUG Looking for jobs to run
+15:21:30,935 apscheduler.scheduler DEBUG Next wakeup is due at 2024-07-29 15:22:30.929207+08:00 (in 59.994113 seconds)
+15:21:30,935 apscheduler.executors.default INFO Running job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:22:30 CST)" (scheduled at 2024-07-29 15:21:30.929207+08:00)
+15:21:30,935 root INFO Running Urban Planning
+15:21:30,935 apscheduler.executors.default INFO Job "your_job (trigger: interval[0:01:00], next run at: 2024-07-29 15:22:30 CST)" executed successfully

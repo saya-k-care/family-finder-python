@@ -1,5 +1,4 @@
 
-from dateparser.data.numeral_translation_data import root
 import feedparser
 from news.news_redis import News
 from news.gpt import GPT
