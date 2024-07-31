@@ -13,6 +13,7 @@ from finder.server.finder_care_taker import FinderCareTaker
 from finder.server.finder_db import FinderDB
 from finder.server.finder_kid import FinderKid
 from news.get_news import GetNews
+from news.get_access_log import GetAccessLog
 
 sys.path.append('../')
 sys.path.append('../../')
@@ -35,7 +36,7 @@ URLS = (
     '/finder/caretaker/getmsgHistory', 'FinderGetCareTakerMsgHistory',
     '/finder/caretaker/delAllWorries', 'FinderDelAllWorries',
     '/finder/new/get', 'HTTPGetNews',
-
+    '/finder/nginx/file/get', 'HTTPGetNginxLog',
 )
 
 class DonatePost(object):
@@ -231,6 +232,15 @@ class FinderDelAllWorries(object):
         user_input = web.input()
         print('user_input id-->' , user_input.id )
         return FinderDB.del_all_worries(user_input.id);
+
+class HTTPGetNginxLog(object):
+
+    def GET(self):
+        web.header('Access-Control-Allow-Origin',      '*')
+        web.header('Access-Control-Allow-Credentials', 'true')
+        web.header('strict-origin-when-cross-origin', 'true')
+        
+        return GetAccessLog.processAccessLog()
     
 def get_agent():
         agent = Agent()

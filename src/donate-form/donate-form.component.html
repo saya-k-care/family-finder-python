@@ -1,0 +1,38 @@
+  <script src="https://unpkg.com/extract-urls@1.4.1/index.js"></script>
+<div class="container p-4">
+    <div class="row">
+        <div class="col-sm-12">
+            <h6 class="title">Donation Form</h6>
+        </div>
+    </div>
+    <hr>
+    Hi Sir/Madam, Thank for your interest to donate. Our online donation payment gateway not available yet. 
+    You may leave your contact here and we will get back to you soonest. <p></p>
+    <div class="row">
+        <div class="col-sm-12">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" novalidate class="form-horizontal">
+
+                <div class="col-sm-4 mb-3">
+                    <div class="form-group">
+                        <label>E-mail Address</label>
+                        <input type="text" name="email" formControlName="email" class="form-control" placeholder="Your Email"id="email" />
+                    </div>
+                </div>
+
+                <div *ngIf="!spinner" class="row submmit">
+                    <div class="col-sm-4 mb-3">
+                        <button class="btn btn-primary btn-outline bg-olive" type="submit" >Submit</button>
+                    </div>
+                </div>
+
+                <div class="loader" *ngIf="spinner">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
