@@ -10,8 +10,11 @@ class News:
     news_ai = None
     well_being_ai = None
     description = None
+    description_my = None
     bible_ai = None
     bible_life = None
+    is_duplicate = False
+    headline = None
     
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
@@ -30,3 +33,20 @@ class News:
         newsLocal.__list__ = news
 
         return newsLocal 
+
+    @staticmethod
+    def set_object(old_object):
+        news = News()
+        news.title = old_object.title
+        news.link = old_object.link
+        news.image_url = old_object.image_url
+        news.pubDate = old_object.pubDate
+        news.isPositive = old_object.isPositive
+        news.news_ai = old_object.news_ai
+        news.well_being_ai = old_object.well_being_ai
+        news.description = old_object.description
+        news.description = old_object.description
+        news.bible_life = old_object.bible_life
+        news.description_my  = old_object.description_my
+        news.headline = old_object.headline
+        return news 

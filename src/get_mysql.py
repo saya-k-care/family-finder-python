@@ -37,6 +37,7 @@ URLS = (
     '/finder/caretaker/delAllWorries', 'FinderDelAllWorries',
     '/finder/new/get', 'HTTPGetNews',
     '/finder/nginx/file/get', 'HTTPGetNginxLog',
+    '/finder/sports/get', 'HTTPGetNewsSports',
 )
 
 class DonatePost(object):
@@ -201,7 +202,16 @@ class HTTPGetNews(object):
         web.header('strict-origin-when-cross-origin', 'true')
         user_input = web.input()
         return GetNews.getNews(user_input.date, json.loads(user_input.is_positive.lower()))
-    
+
+class HTTPGetNewsSports(object):
+
+    def GET(self):
+        web.header('Access-Control-Allow-Origin',      '*')
+        web.header('Access-Control-Allow-Credentials', 'true')
+        web.header('strict-origin-when-cross-origin', 'true')
+        user_input = web.input()
+        return GetNews.get_today_all_news_sport()
+        
 class FinderGospel(object):
 
     def GET(self):

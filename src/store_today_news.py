@@ -12,6 +12,7 @@ from news.gpt import GPT
 from news.news_redis import News
 from rss_google import RSSGoogle
 import logging
+from news.get_news import GetNews
 
 def is_yes(text):
     if "Yes," in text:
@@ -28,13 +29,15 @@ def remove_yes_or_no(text):
 def process_negative_news(news_redis_obj):
     for value in news_redis_obj:
         try:
-        # print(value.title)
+            if value.is_duplicate == True:
+                print ("skip process_negative_news,", value.isPositive)
         #answer = GPT.askGPTDummyYes('Important?' + value.title)
-            if value.isPositive == False: 
-                #answer = GPT.askGPTDummyWellBeing(value.news_ai)
-                answer = GPT.askGPT_well_being(value.news_ai)
-                print ("well being raw answer-->" , answer)
-                value.well_being_ai = answer
+            else:
+                if value.isPositive == False: 
+                    #answer = GPT.askGPTDummyWellBeing(value.news_ai)
+                    answer = GPT.askGPT_well_being(value.news_ai)
+                    print ("well being raw answer-->" , answer)
+                    value.well_being_ai = answer
         
         except Exception as error:
             print("An exception occurred," , error)
@@ -45,10 +48,27 @@ def process_bible_news(news_redis_obj):
     for value in news_redis_obj:
         try:
         # print(value.title)
-        #answer = GPT.askGPTDummyYes('Important?' + value.title)
-            answer = GPT.askGPT_bible(value.title)
-            value.bible_life = GPT.askGPT_bible_life(answer)
-            value.bible_ai = answer
+            if value.is_duplicate == True:
+                print ("skip process_bible_news,", value.isPositive)
+            else:
+                answer = GPT.askGPT_bible(value.title)
+                value.bible_life = GPT.askGPT_bible_life(answer)
+                value.bible_ai = answer
+        
+        except Exception as error:
+            print("An exception occurred," , error)
+            print(traceback.format_exc())
+    return news_redis_obj
+
+def translate_my_desc(news_redis_obj):
+    for value in news_redis_obj:
+        try:
+        # print(value.title)
+            if value.is_duplicate == True:
+                print ("skip translate_my_desc,", value.description_my)
+            else:
+                answer = GPT.askGPT_translate_my(value.description)
+                value.description_my = answer
         
         except Exception as error:
             print("An exception occurred," , error)
@@ -92,25 +112,69 @@ logging.basicConfig(filename='storenews.txt',
 logger = logging.getLogger('urbanGUI')
 
 logging.info("Starting process news")
-    
-news_src_list=[]
-news_src_list = RSSGoogle.processGoogleNews(news_src_list)
 
-print ('Total Length->', len(news_src_list), ' json_data raw -->' , news_src_list)
+def process_google_news(news_src_list, old_news_redis_obj):
+    try:
+        news_src_list = RSSGoogle.processGoogleNews(news_src_list, old_news_redis_obj)
+        print ('Total Length->', len(news_src_list), ' json_data raw -->' , news_src_list)
+        news_src_json = jsonpickle.encode(news_src_list)
+        
+    except Exception as error:
+            print("An exception occurred," , error)
+            print(traceback.format_exc())
+    return news_src_json
 
-news_src_json = jsonpickle.encode(news_src_list)
-
+def make_news_temp_file(news_src_list,file_name):
+    try:
 # r = redis.Redis(host='bayi', port=8150, db=0)
+
+        redis_file = open(file_name + "_temp", "w")
+        redis_file.write(news_src_json)
+        redis_file.close()
+
+        redis_file = open(file_name + "_temp", "r+")
+        news_redis_json = redis_file.read()
+        redis_file.close()
+        
+    except Exception as error:
+            print("An exception occurred," , error)
+            print(traceback.format_exc())
+    return news_src_json
+
+def process_news_ai_is_positive(news_redis_obj):
+    try:
+        logging.info('length news_redis_obj after save -->')
+        for value in news_redis_obj:
+            try:
+        # print(value.title)
+        #answer = GPT.askGPTDummyYes('Important?' + value.title)
+                if value.is_duplicate == True:
+                    print ("skip process_news_ai_is_positive,", value.isPositive)
+                else:
+                    answer = GPT.askGPT('Important?' + value.title)
+                    yes_or_no = is_yes(answer)
+                    answer = remove_yes_or_no(answer)
+                    value.isPositive = yes_or_no
+                    value.news_ai = answer
+                    print ("processed new answer-->" , yes_or_no , "." + answer)
+        #logging.info("processed answer-->" , yes_or_no , "." + answer)
+            except Exception as error:
+                print("An exception occurred," , error)
+                print(traceback.format_exc())
+        
+    except Exception as error:
+        print("An exception occurred," , error)
+        print(traceback.format_exc())
+        
+    return news_redis_obj
+
+news_src_list=[]
+old_news_redis_obj = GetNews.get_today_all_news()
+news_src_json = process_google_news(news_src_list, old_news_redis_obj)
 news_dir = os.environ.get('NEWS_DIR')
 file_name = str(news_dir) + str(date.today()) + "_redis_news.txt"
 
-redis_file = open(file_name + "_temp", "w")
-redis_file.write(news_src_json)
-redis_file.close()
-
-redis_file = open(file_name + "_temp", "r+")
-news_redis_json = redis_file.read()
-redis_file.close()
+news_redis_json = make_news_temp_file(news_src_list, file_name)
 # r.set(today_date, news_src_json)
 
 #news_redis_json = r.get(today_date);
@@ -118,29 +182,14 @@ redis_file.close()
 print ('file news -->' + news_redis_json)
 news_redis_obj = jsonpickle.decode(news_redis_json)
 print ('length news_redis_obj after save -->' , len(news_redis_obj))
-
-logging.info('length news_redis_obj after save -->')
-for value in news_redis_obj:
-    try:
-        # print(value.title)
-        #answer = GPT.askGPTDummyYes('Important?' + value.title)
-        answer = GPT.askGPT('Important?' + value.title)
-        print ("raw answer-->" , answer)
-        yes_or_no = is_yes(answer)
-        answer = remove_yes_or_no(answer)
-        value.isPositive = yes_or_no
-        value.news_ai = answer
-        print ("processed answer-->" , yes_or_no , "." + answer)
-        logging.info("processed answer-->" , yes_or_no , "." + answer)
-    except Exception as error:
-        print("An exception occurred," , error)
-        print(traceback.format_exc())
-
+news_redis_obj = process_news_ai_is_positive(news_redis_obj)
 logging.info("processed negative news")
 news_redis_obj = process_negative_news(news_redis_obj)
 logging.info("processed bible news")
 news_redis_obj = process_bible_news(news_redis_obj)
-news_dir = os.environ.get('NEWS_DIR') 
+
+news_redis_obj = translate_my_desc(news_redis_obj)
+logging.info("processed bahasa")
 redis_file = open(file_name, "w")
         
 news_src_json = jsonpickle.encode(news_redis_obj)

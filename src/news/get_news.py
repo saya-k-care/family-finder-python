@@ -23,6 +23,38 @@ class GetNews:
         return json_news
 
     @staticmethod
+    def get_today_all_news():
+        news_dir = os.environ.get('NEWS_DIR')
+        file_name = str(news_dir) + str(date.today()) + "_redis_news.txt"
+        print ('Opening file_name-->' , file_name)
+        is_file_exist = os.path.isfile(file_name)
+        if is_file_exist:
+            redis_file = open(file_name, "r+")
+            news_redis_json = redis_file.read()
+            redis_file.close()
+            news_redis_obj = jsonpickle.decode(news_redis_json)
+            json_news = jsonpickle.encode(news_redis_obj)
+            print ("get_today_all_news json_news--->" , json_news)
+            return json_news
+        return None
+
+    @staticmethod
+    def get_today_all_news_sport():
+        news_dir = os.environ.get('NEWS_DIR')
+        file_name = str(news_dir) + str(date.today()) + "_redis_news_sport.txt"
+        print ('Opening get_today_all_news_sport file_name-->' , file_name)
+        is_file_exist = os.path.isfile(file_name)
+        if is_file_exist:
+            redis_file = open(file_name, "r+")
+            news_redis_json = redis_file.read()
+            redis_file.close()
+            news_redis_obj = jsonpickle.decode(news_redis_json)
+            json_news = jsonpickle.encode(news_redis_obj)
+            print ("get_today_all_news_sport json_news--->" , json_news)
+            return json_news
+        return None
+    
+    @staticmethod
     def getHeadline():
         news_dir = os.environ.get('NEWS_DIR')
         file_name = str(news_dir) + str(date.today()) + "_redis_news.txt"
@@ -45,5 +77,5 @@ class GetNews:
                 print("An exception occurred," , error)
                 print(traceback.format_exc())
         
-print (GetNews.getHeadline())
+#print (GetNews.getHeadline())
 #print (GetNews.getNews("2024-07-26", True))

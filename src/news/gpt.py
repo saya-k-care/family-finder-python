@@ -2,6 +2,8 @@ import openai
 import os
 from _datetime import date
 import requests
+import jsonpickle
+import json
 
 ai_key = os.environ.get('OPENAI_API_KEY')
 openai.api_key = ai_key
@@ -12,12 +14,12 @@ class GPT:
         ques = str + " .Is this a positive, not politic related and important news? Answer yes or no and explain in less than 15 words";
         completion = openai.chat.completions.create(
             model="gpt-4o-mini",
-            
+           
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-    
-        print(completion.choices[0].message.content)
+   
+        #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
     @staticmethod
@@ -28,13 +30,12 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-    
-        print(completion.choices[0].message.content)
+   
+        #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
     @staticmethod
     def askGPT_badminton():
-        today_date = str(date.today())
         r = requests.get("https://news.google.com/rss/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRFp1ZEdvU0JXVnVMVTFaR2dKTldTZ0FQAQ?hl=en-MY&gl=MY&ceid=MY:en")
         trim_str = r.text[0:2000]
         print ("trim_str-->" + trim_str)
@@ -44,10 +45,10 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-        
+       
         result = completion.choices[0].message.content
         print(result)
-        
+       
         #summary = result + " .Provide a score result and some sport comments"
         #completion = openai.chat.completions.create(
         #    model="gpt-4o",
@@ -57,7 +58,7 @@ class GPT:
         #result = completion.choices[0].message.content
         #print(result)      
         return completion.choices[0].message.content
-    
+   
     @staticmethod
     def askGPT_bible(str):
         ques = str + " Map this news to Bible verse in less than 20 words";
@@ -66,8 +67,8 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-    
-        print(completion.choices[0].message.content)
+   
+        #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
     @staticmethod
@@ -78,8 +79,8 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-    
-        print(completion.choices[0].message.content)
+   
+        #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
     @staticmethod
@@ -87,13 +88,40 @@ class GPT:
         ques = str + " . Summarize this in less than 50 words";
         completion = openai.chat.completions.create(
             model="gpt-4o-mini",
+            # response_format= {"type": "json_object"},
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-    
-        print(completion.choices[0].message.content)
+   
+        print("askGPT_description-->", completion.choices[0].message.content)
         return completion.choices[0].message.content
-            
+
+    @staticmethod
+    def askGPT_translate_my(str):
+        ques = str + " . Translate this into Bahasa Melayu.";
+        completion = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            # response_format= {"type": "json_object"},
+            messages=[
+                {"role": "user", "content": ques}
+                ],)
+   
+        print("askGPT_description-->", completion.choices[0].message.content)
+        return completion.choices[0].message.content
+    
+    @staticmethod
+    def askGPT_translate(str):
+        ques = str + " . Translate this into Chinese and Malay in less than 5 words in JSON string only";
+        completion = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            response_format= {"type": "json_object"},
+            messages=[
+                {"role": "user", "content": ques}
+                ],)
+   
+        print(completion.choices[0].message.content.encode("utf-8"))
+        return completion.choices[0].message.content
+           
     @staticmethod
     def askGPTDummyYes(str):
         return "Yes, it highlights the need for attitudes to evolve with new policies for effective implementation."
@@ -104,7 +132,57 @@ class GPT:
 
     @staticmethod
     def askGPTDummyNo(str):
-        return "No, it reflects divisive rhetoric, which can intensify political tensions."       
-     
-#GPT.askGPT("Over 142,000 individuals released from bankruptcy under Second Chance Policy, says PM.")
-GPT.askGPT_badminton()
+        return "No, it reflects divisive rhetoric, which can intensify political tensions."      
+   
+    @staticmethod
+    def process_cn_malay(news_src_json):
+        return "No, it reflects divisive rhetoric, which can intensify political tensions."
+   
+    #GPT.askGPT("Over 142,000 individuals released from bankruptcy under Second Chance Policy, says PM.")
+
+    @staticmethod
+    def translateUTF8(str):
+        #answer = GPT.askGPT_badminton()
+        answer = "what is this"
+        news_src_list=[]
+        malay_chinese = GPT.askGPT_translate(answer)
+        malay_chinese = malay_chinese.encode('utf-8')
+        #print ('malay_chinese encode-->' , malay_chinese)
+        #print (malay_chinese.decode('utf-8'))
+# String containing the escape sequence
+        news_src_list.append(malay_chinese.decode('utf-8'))
+        news_src_json = jsonpickle.encode(news_src_list)
+        redis_file = open("malay_chinese.txt", "w", encoding="utf-8")
+        redis_file.write(news_src_json)
+        redis_file.close()
+
+        redis_file = open("malay_chinese.txt", "r+", encoding="utf-8")
+        news_redis_json = redis_file.read()
+
+        json_obj = jsonpickle.decode(news_redis_json)
+        #json_obj = jsonpickle.encode(json_obj)
+        print ("json_obj==>" , json_obj)
+        #data = json.loads(json_obj[0])
+        json_str = json_obj[0].strip()
+
+# Load the JSON-like string as JSON data
+        data = json.loads(json_str)
+
+# Print the value associated with the "Malay" key
+        malay_value = data["Malay"]
+        print(malay_value)
+
+        redis_file.close()  
+        return json_obj
+
+    @staticmethod
+    def readDummyEncoded():
+
+        redis_file = open("2024-07-31_redis_news.txt", "r+", encoding="utf-8")
+        news_redis_json = redis_file.read()
+        redis_file.close()  
+        return news_redis_json
+
+if __name__ == '__main__':
+    print (GPT.readDummyEncoded())
+    print (GPT.translateUTF8('test'))
