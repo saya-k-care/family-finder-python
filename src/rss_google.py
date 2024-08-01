@@ -84,8 +84,8 @@ class RSSGoogle:
                 
                 news_src_list.append(newsObject)
                 #print("\n", newsObject.description)
-                if (i == 0):
-                    break
+                #if (i == 0):
+                #    break
         else:
             print("Failed to get RSS feed. Status code:", feed.status)
         return news_src_list
