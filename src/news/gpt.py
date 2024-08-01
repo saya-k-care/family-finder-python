@@ -4,6 +4,7 @@ from _datetime import date
 import requests
 import jsonpickle
 import json
+import time
 
 ai_key = os.environ.get('OPENAI_API_KEY')
 openai.api_key = ai_key
@@ -18,7 +19,7 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-   
+        time.sleep(1)
         #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
@@ -30,7 +31,7 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-   
+        time.sleep(1)
         #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
@@ -67,7 +68,7 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-   
+        time.sleep(1)
         #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
@@ -79,7 +80,7 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-   
+        time.sleep(1)
         #print(completion.choices[0].message.content)
         return completion.choices[0].message.content
 
@@ -92,7 +93,7 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-   
+        time.sleep(1)
         print("askGPT_description-->", completion.choices[0].message.content)
         return completion.choices[0].message.content
 
@@ -105,7 +106,7 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-   
+        time.sleep(1)
         print("askGPT_description-->", completion.choices[0].message.content)
         return completion.choices[0].message.content
     
@@ -118,7 +119,7 @@ class GPT:
             messages=[
                 {"role": "user", "content": ques}
                 ],)
-   
+        time.sleep(1)
         print(completion.choices[0].message.content.encode("utf-8"))
         return completion.choices[0].message.content
            
