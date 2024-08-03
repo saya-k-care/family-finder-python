@@ -1,5 +1,51 @@
 import re
-inputString = "b'{"summary":"Ismail Haniyeh, a Hamas leader, has been killed in an alleged Israeli strike in Iran, prompting funeral prayers at mosques under Jakim. His death threatens to escalate tensions in the region.","translations":{"Chinese":"\xe5\x93\x88\xe9\xa9\xac\xe6\x96\xaf\xe9\xa2\x86\xe5\xaf\xbc\xe4\xba\xba\xe4\xbc\x8a\xe6\x96\xaf\xe6\xa2\x85\xe5\xb0\x94\xc2\xb7\xe5\x93\x88\xe5\xb0\xbc\xe8\x80\xb6\xe5\x9c\xa8\xe4\xbc\x8a\xe6\x9c\x97\xe8\xa2\xab\xe6\x8c\x87\xe4\xbb\xa5\xe8\x89\xb2\xe5\x88\x97\xe7\xa9\xba\xe8\xa2\xad\xe6\x9d\x80\xe5\xae\xb3\xef\xbc\x8c\xe4\xbf\x83\xe4\xbd\xbf\xe5\x9c\xa8Jakim\xe4\xb8\x8b\xe7\x9a\x84\xe6\xb8\x85\xe7\x9c\x9f\xe5\xaf\xba\xe4\xb8\xbe\xe8\xa1\x8c\xe6\xae\xa1\xe8\x91\xac\xe7\xa5\x88\xe7\xa5\xb7\xe3\x80\x82\xe4\xbb\x96\xe7\x9a\x84\xe6\xad\xbb\xe5\xa8\x81\xe8\x83\x81\xe5\x88\xb0\xe8\xaf\xa5\xe5\x9c\xb0\xe5\x8c\xba\xe7\x9a\x84\xe7\xb4\xa7\xe5\xbc\xa0\xe5\xb1\x80\xe5\x8a\xbf\xe5\x8d\x87\xe7\xba\xa7\xe3\x80\x82","Bahasa":"Pemimpin Hamas Ismail Haniyeh telah dibunuh dalam serangan diduga oleh Israel di Iran, mendorong doa pemakaman di masjid-masjid di bawah Jakim. Kematian ini mengancam akan memperburuk ketegangan di kawasan tersebut."}}"
-'
-a = re.findall(r'"([^"]*)"', inputString)
-print (a)
+
+
+class GetAccessTest:
+    @staticmethod
+    def getUser(log_entry, access_set):
+        # Split the log entry by spaces
+        log_parts = log_entry.split()
+
+        # Extract the last string (IP address)
+        ip_address = log_parts[-1]
+
+        # Extract the date and time using regular expression
+        datetime_pattern = r'\[(.*?)\]'
+        match = re.search(datetime_pattern, log_entry)
+        
+        if match:
+            date_and_time = match.group(1)
+            date_time_str = date_and_time[12:17]  # Extract characters between positions 12 and 17
+            print(f'Extracted Date and Time: {date_time_str}')
+        else:
+            print('Date and Time not found in the log entry.')
+            return
+
+        start_index = log_entry.find("http")
+        http_string = None
+
+        # Find the position of the closing double quote after "http"
+        if start_index != -1:
+            end_index = log_entry.find('"', start_index)
+            if end_index != -1:
+                http_string = log_entry[start_index:end_index]
+                if "undefined" in http_string or "news" in http_string or "gospel" in http_string:
+                    print(f'String starting with "http": {http_string}')
+                else:
+                    http_string = None
+
+        if http_string is not None:
+            user = f"[TIME]={date_time_str} [URL]={http_string} [IP]={ip_address}"
+
+            access_set.add(user)
+            #print("User-->", user)
+        return access_set
+
+# Call the getUser method with the log entry
+log_entry = '172.68.26.155 - - [02/Aug/2024:03:51:27 +0800] "GET /8805.878a297709031db8.js HTTP/1.1" 200 6415 "http://eyebot.name.my/map/undefined" "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/126.0.6478.182 Safari/537.36" "66.249.65.198"'
+
+access_set = set()
+access_set = GetAccessTest.getUser(log_entry,access_set)
+print(access_set)
+print(f"Total Users={len(access_set)}")
