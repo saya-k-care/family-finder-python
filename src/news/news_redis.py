@@ -11,10 +11,13 @@ class News:
     well_being_ai = None
     description = None
     description_my = None
+    description_cn = None
     bible_ai = None
     bible_life = None
+    bible_life_cn = None
     is_duplicate = False
     headline = None
+    pinyin = None
     
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
@@ -49,4 +52,7 @@ class News:
         news.bible_life = old_object.bible_life
         news.description_my  = old_object.description_my
         news.headline = old_object.headline
+        news.bible_life_cn = old_object.bible_life_cn
+        news.description_cn = old_object.description_cn
+        news.pinyin = old_object.pinyin
         return news 

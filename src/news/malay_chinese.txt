@@ -1,1 +1,0 @@
-["{\n  \"Chinese\": \"\u8fd9\u662f\u4ec0\u4e48\",\n  \"Malay\": \"Apa ini\"\n}"]

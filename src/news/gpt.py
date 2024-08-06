@@ -109,7 +109,22 @@ class GPT:
         time.sleep(1)
         print("askGPT_description-->", completion.choices[0].message.content)
         return completion.choices[0].message.content
-    
+
+    @staticmethod
+    def askGPT_translate_cn(str):
+        format_json = '{"description_cn": [""], "bible_life_cn": [""], "bible_life_pinyin": [""]}'
+        ques = str + " . translate this into chinese and pinyin in this format " + format_json + " only "  
+        
+        print ("ques askGPT_translate_cn-->" + ques)
+        completion = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            # response_format= {"type": "json_object"},
+            messages=[
+                {"role": "user", "content": ques}
+                ],)
+        time.sleep(1)
+        return completion.choices[0].message.content
+            
     @staticmethod
     def askGPT_translate(str):
         ques = str + " . Translate this into Chinese and Malay in less than 5 words in JSON string only";

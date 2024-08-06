@@ -75,13 +75,9 @@ class RSSGoogle:
                     print ("skip ask GPT -->" + old_object.title)
                 else:                    
                     newsObject = RSSGoogle.set_object_news(newsObject, entry)
-                    print ("new object, ask GPT -->" + newsObject.title)
                     newsObject.description = GPT.askGPT_description(entry.description)         
                     print ("newsObject.description -->" , newsObject.description)
-                    #print ("new_object title-->" , newsObject.title)
-                #newsObject = RSSGoogle.process_malay_cn(newsObject.description, newsObject)
-                #newsObject.image_url = object['image_url'];
-                
+                    #newsObject.description = "Just a description"
                 news_src_list.append(newsObject)
                 #print("\n", newsObject.description)
                 if (i == 20):

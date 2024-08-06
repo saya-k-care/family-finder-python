@@ -12,7 +12,7 @@ class GetNews:
         news_dir = os.environ.get('NEWS_DIR')
         file_name = str(news_dir) + str(date) + "_redis_news.txt"
         print ('Opening file_name-->' , file_name)
-        redis_file = open(file_name, "r+")
+        redis_file = open(file_name, "r+", encoding="utf-8")
         news_redis_json = redis_file.read()
         redis_file.close()
 
@@ -29,7 +29,7 @@ class GetNews:
         print ('Opening file_name-->' , file_name)
         is_file_exist = os.path.isfile(file_name)
         if is_file_exist:
-            redis_file = open(file_name, "r+")
+            redis_file = open(file_name, "r+", encoding="utf-8")
             news_redis_json = redis_file.read()
             redis_file.close()
             news_redis_obj = jsonpickle.decode(news_redis_json)
@@ -45,7 +45,7 @@ class GetNews:
         print ('Opening get_today_all_news_sport file_name-->' , file_name)
         is_file_exist = os.path.isfile(file_name)
         if is_file_exist:
-            redis_file = open(file_name, "r+")
+            redis_file = open(file_name, "r+", encoding="utf-8")
             news_redis_json = redis_file.read()
             redis_file.close()
             news_redis_obj = jsonpickle.decode(news_redis_json)
@@ -59,7 +59,7 @@ class GetNews:
         news_dir = os.environ.get('NEWS_DIR')
         file_name = str(news_dir) + str(date.today()) + "_redis_news.txt"
 
-        redis_file = open(file_name, "r+")
+        redis_file = open(file_name, "r+", encoding="utf-8")
         news_redis_json = redis_file.read()
         redis_file.close()
         

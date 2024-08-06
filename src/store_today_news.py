@@ -75,6 +75,34 @@ def translate_my_desc(news_redis_obj):
             print(traceback.format_exc())
     return news_redis_obj
 
+def process_cn(news_redis_obj):
+    try:
+        for value in news_redis_obj:
+            try:
+                if value.is_duplicate == True:
+                    print ("skip process_cn,", value.description)
+                else:
+                    news_prepare_cn = News()
+                    news_prepare_cn.description = value.description
+                    news_prepare_cn.bible_life = value.bible_life
+
+                #json_string = news_prepare_cn.toJSON()
+                    json_string = 'description_cn:' + str(news_prepare_cn.description) + '  + bible_life_cn:' + str(news_prepare_cn.bible_life)
+                    data = GPT.askGPT_translate_cn(json_string)
+
+                    print ("news_cn_json-->" + str(data))
+                    json_dict = json.loads(data)
+                    value.description_cn = json_dict["description_cn"]
+                    value.bible_life_cn = json_dict["bible_life_cn"]
+                    value.pinyin = json_dict["bible_life_pinyin"]
+            except Exception as error:
+                print("An exception occurred:", error)
+                print(traceback.format_exc())
+    except Exception as error:
+        print("An exception occurred:", error)
+        print(traceback.format_exc())
+    return news_redis_obj
+
 def newsdata(news_src_list):
     r = requests.get("https://newsdata.io/api/1/latest?apikey=pub_49037ebd46b4a3fd58ca99decfb2cd2e52794&q=malaysia&country=my")
 #r = requests.get("http://localhost:8080/examples/news.txt")
@@ -128,11 +156,11 @@ def make_news_temp_file(news_src_list,file_name):
     try:
 # r = redis.Redis(host='bayi', port=8150, db=0)
 
-        redis_file = open(file_name + "_temp", "w")
+        redis_file = open(file_name + "_temp", "w", encoding="utf-8")
         redis_file.write(news_src_json)
         redis_file.close()
 
-        redis_file = open(file_name + "_temp", "r+")
+        redis_file = open(file_name + "_temp", "r+", encoding="utf-8")
         news_redis_json = redis_file.read()
         redis_file.close()
         
@@ -189,8 +217,9 @@ logging.info("processed bible news")
 news_redis_obj = process_bible_news(news_redis_obj)
 
 news_redis_obj = translate_my_desc(news_redis_obj)
+news_redis_obj = process_cn(news_redis_obj)
 logging.info("processed bahasa")
-redis_file = open(file_name, "w")
+redis_file = open(file_name, "w", encoding="utf-8")
         
 news_src_json = jsonpickle.encode(news_redis_obj)
 news_redis_obj = list(dict.fromkeys(news_redis_obj))

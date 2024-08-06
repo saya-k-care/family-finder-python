@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/news/gpt.py=UTF-8
+encoding//src/news/test2.py=UTF-8
+encoding//src/news/test_gpt.py=UTF-8
+encoding//src/store_today_news.py=UTF-8
 encoding//src/utf8.py=UTF-8
